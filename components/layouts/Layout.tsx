@@ -19,7 +19,7 @@ export const Layout: React.FC<Props> = ({children, title}) => {
 
         <Nav />
 
-        <main>{ children }</main>
+        <main style={{marginTop: '20px'}}>{ children }</main>
     </>
   )
 }
