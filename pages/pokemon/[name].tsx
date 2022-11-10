@@ -1,11 +1,11 @@
+import { useState } from 'react';
+import type { GetStaticPaths, GetStaticProps } from 'next';
 import { axios } from '../../services';
 import { Layout } from '../../components/layouts';
 import { Button, Card, Container, Grid, Text } from '@nextui-org/react';
 import { HeartIcon } from '../../components/ui';
-import type { GetStaticPaths, GetStaticProps } from 'next';
 import type { REQ } from '..';
 import type { Pokemon, Sprites } from '../../interfaces';
-import { useState } from 'react';
 import { isOnStorage, saveFav } from '../../utils';
 
 interface Props {
@@ -19,10 +19,6 @@ const onServer: boolean = (typeof window === 'undefined') ? true : false;
 const Pokemon: React.FC<{ pokemon: Props }> = ({ pokemon }) => {
 
   const [ check, setCheck ] = useState(!onServer && isOnStorage({id: pokemon.id}));
-  
-  // onServer
-  //   ? console.log('On the server side')
-  //   : console.log('On the client side')
 
   const handleSave = () => {
     saveFav({ name: pokemon.name, id: pokemon.id });
