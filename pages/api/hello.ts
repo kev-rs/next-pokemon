@@ -23,6 +23,9 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
   // Run the middleware
   await runMiddleware(req, res, cors)
 
+  if(!req.query.key) return res.status(401).send('Secret Key not found');
+  if(req.query.key !== process.env.SECRET_KEY) return res.status(401).send('Secret Key incorrect');
+
   // Rest of the API logic
   res.json({ message: 'Hello Everyone!' })
 }

@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 
 const Home: React.FC<{ pokemons: RES }> = ({ pokemons }) => {
 
-  useEffect(() => {
-    fetch('/api/hello').then(console.log);
-  }, []);
+  // useEffect(() => {
+  //   fetch('/api/hello').then(console.log);
+  // }, []);
 
   return (
     <Layout title='Poke Next'>
@@ -32,6 +32,10 @@ export type REQ = z.infer<typeof pokeValidator>;
 export type RES = z.infer<typeof response>;
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
+
+  // SECRET_KEY
+  const data = await fetch(`/api/hello?key=${process.env.SECRET_KEY}`);
+
   const pokemons = (await getPokes()).results.map(({ name, ...rest }, i) => ({
     name,
     id: `${i+1}`,
