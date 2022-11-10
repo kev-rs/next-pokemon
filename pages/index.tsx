@@ -34,7 +34,7 @@ export type RES = z.infer<typeof response>;
 export const getStaticProps: GetStaticProps = async (ctx) => {
 
   // SECRET_KEY
-  const data = await fetch(`/api/hello?key=${process.env.SECRET_KEY}`);
+  const data = await fetch(`https://next-pokemon-mocha.vercel.app/api/hello?key=${process.env.SECRET_KEY}`);
 
   const pokemons = (await getPokes()).results.map(({ name, ...rest }, i) => ({
     name,
