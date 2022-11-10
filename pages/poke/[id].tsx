@@ -93,28 +93,33 @@ const Pokemon: React.FC<{ pokemon: Props }> = ({ pokemon }) => {
 export default Pokemon;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await axios.get<REQ>(`/pokemon?limit=100`);
-  const paths = data.results.map(({ name }) => ({ params: { name } }));
+  const { data } = await axios.get<REQ>(`/pokemon?limit=80`);
+  const paths = data.results.map((_, i) => ({ params: { id: `${i+1}` } }));
   return { paths, fallback: 'blocking' };
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { name } = params as { name: string };
-  const pokemon = await getPoke(name);
+  const { id } = params as { id: string };
+  const pokemon = await getPoke(id);
+
   if(!pokemon) return {
     redirect: {
       destination: '/',
       permanent: false,
     }
   }
-  return { props: { pokemon }, revalidate: 86400 };
+
+  return { 
+    props: { pokemon },
+    revalidate: 86400 // 60 * 60 * 24
+   };
 }
 
-const getPoke = async (names: string) => {
+const getPoke = async (id: string) => {
   try {
-    const { data } = await axios.get<Pokemon>(`/pokemon/${names}`);
+    const { data } = await axios.get<Pokemon>(`/pokemon/${id}`);
     return { name: data.name, id: data.id, sprites: data.sprites };
-  } catch (error) {
+  } catch(err) {
     return null;
   }
 }

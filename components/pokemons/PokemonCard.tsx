@@ -15,7 +15,7 @@ export const PokemonCard: React.FC<{ prop: Props }> = ({ prop }) => {
   return (
     <Grid key={prop.id} xs={12} sm={3} md={2} xl={1}>
       <Card isHoverable isPressable>
-        <Card.Body onClick={() => router.push(`/pokemon/${prop.name}`)}>
+        <Card.Body onClick={() => router.push(`/poke/${prop.id}`)}>
           <Card.Image
             src={prop.img || '/no-image.jpg'}
             alt={prop.name}

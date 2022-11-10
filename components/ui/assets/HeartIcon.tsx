@@ -2,10 +2,10 @@ interface Props {
     [x: string]: any;
     fill?: string | undefined;
     filled: boolean;
-    size?: any;
-    height?: any;
-    width?: any;
-    label?: any;
+    size?: string | number;
+    height?: string | number;
+    width?: string | number;
+    label?: string;
 }
 
 export const HeartIcon = ({
