@@ -3,8 +3,13 @@ import { Layout } from '../components/layouts';
 import { axios } from '../services';
 import z from 'zod'
 import { Pokemons } from '../components/pokemons';
+import { useEffect } from 'react';
 
 const Home: React.FC<{ pokemons: RES }> = ({ pokemons }) => {
+
+  useEffect(() => {
+    fetch('/api/hello').then(console.log);
+  }, []);
 
   return (
     <Layout title='Poke Next'>
